@@ -21,16 +21,11 @@
     --surface-card: #FFFFFF;
     --border: #E8DDD4;
     --border-soft: #F0E8E0;
-    --blue-bg: #EEF4FF;
-    --blue-text: #1D4ED8;
-    --teal-bg: #ECFDF5;
-    --teal-text: #065F46;
-    --amber-bg: #FFFBEB;
-    --amber-text: #92400E;
-    --coral-bg: #FFF5F5;
-    --coral-text: #991B1B;
-    --green-bg: #F0FDF4;
-    --green-text: #14532D;
+    --blue-bg: #EEF4FF;   --blue-text: #1D4ED8;
+    --teal-bg: #ECFDF5;   --teal-text: #065F46;
+    --amber-bg: #FFFBEB;  --amber-text: #92400E;
+    --coral-bg: #FFF5F5;  --coral-text: #991B1B;
+    --green-bg: #F0FDF4;  --green-text: #14532D;
   }
 
   body {
@@ -43,141 +38,116 @@
   }
 
   /* ─── HEADER ─────────────────────────────────── */
-  .site-header {
-    background: var(--ink);
-    padding: 0;
-  }
+  .site-header { background: var(--ink); }
+
   .hn-topbar {
     background: var(--hn-orange);
     display: flex;
     align-items: center;
-    gap: 14px;
-    padding: 10px 48px;
+    gap: 12px;
+    padding: 10px 32px;
   }
   .hn-logo-box {
     background: white;
     color: var(--hn-orange);
     font-family: 'Syne', sans-serif;
     font-weight: 800;
-    font-size: 15px;
+    font-size: 14px;
     padding: 2px 7px;
     border-radius: 3px;
-    letter-spacing: -0.5px;
+    flex-shrink: 0;
   }
   .hn-topbar-title {
     color: white;
     font-family: 'Syne', sans-serif;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.02em;
   }
   .header-body {
-    padding: 48px 48px 40px;
+    padding: 36px 32px 32px;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: 24px;
+    gap: 20px;
+    flex-wrap: wrap;
   }
   .header-eyebrow {
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--hn-orange);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .header-title {
     font-family: 'Syne', sans-serif;
-    font-size: 42px;
+    font-size: clamp(26px, 4vw, 42px);
     font-weight: 800;
-    color: #FFFFFF;
+    color: #fff;
     line-height: 1.1;
     letter-spacing: -1px;
   }
   .header-title span { color: var(--hn-orange); }
   .header-desc {
-    margin-top: 12px;
-    font-size: 14px;
+    margin-top: 10px;
+    font-size: 13px;
     color: #A89B8E;
     max-width: 480px;
     line-height: 1.7;
   }
-  .header-meta {
-    text-align: right;
-    flex-shrink: 0;
-  }
-  .meta-item {
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #6B5E54;
-    margin-bottom: 4px;
-  }
-  .meta-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: white;
-  }
+  .header-meta { text-align: right; flex-shrink: 0; }
+  .meta-item { font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: #6B5E54; margin-bottom: 4px; }
+  .meta-value { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; color: white; }
 
-  /* ─── MAIN LAYOUT ─────────────────────────────── */
+  /* ─── MAIN ────────────────────────────────────── */
   .main {
     max-width: 1120px;
     margin: 0 auto;
-    padding: 48px 32px 80px;
+    padding: 40px 24px 72px;
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 40px;
   }
 
-  /* ─── PERSONA CARD ────────────────────────────── */
+  /* ─── CARD ────────────────────────────────────── */
   .persona-card {
     background: var(--surface-card);
     border: 1px solid var(--border);
-    border-radius: 16px;
+    border-radius: 14px;
     overflow: hidden;
     box-shadow: 0 2px 16px rgba(26,18,8,0.06);
   }
+  .persona-stripe { height: 5px; background: var(--hn-orange); }
 
-  .persona-stripe {
-    height: 5px;
-    background: var(--hn-orange);
-  }
-  .persona-stripe.teal { background: #059669; }
-
-  /* ─── PERSONA TOP ─────────────────────────────── */
+  /* ─── TOP GRID ────────────────────────────────── */
   .persona-top {
     display: grid;
-    grid-template-columns: 220px 1fr;
+    grid-template-columns: 200px 1fr;
     border-bottom: 1px solid var(--border-soft);
   }
-
   .persona-photo-col {
     border-right: 1px solid var(--border-soft);
-    padding: 28px 24px;
+    padding: 24px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
+    gap: 12px;
     background: var(--surface-warm);
   }
-
   .photo-frame {
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
     border-radius: 12px;
     border: 2px dashed var(--border);
+    overflow: hidden;
+    flex-shrink: 0;
     background: var(--surface-card);
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 6px;
     color: var(--ink-faint);
   }
-  .photo-frame svg { opacity: 0.4; }
-  .photo-frame span { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
-
   .persona-badge {
     display: inline-block;
     font-size: 10px;
@@ -190,12 +160,6 @@
     color: var(--hn-orange);
     border: 1px solid var(--hn-orange-mid);
   }
-  .persona-badge.teal {
-    background: var(--teal-bg);
-    color: var(--teal-text);
-    border-color: #A7F3D0;
-  }
-
   .photo-stats { width: 100%; }
   .stat-row {
     display: flex;
@@ -204,82 +168,48 @@
     padding: 5px 0;
     border-bottom: 1px solid var(--border-soft);
     font-size: 11px;
+    gap: 6px;
   }
   .stat-row:last-child { border-bottom: none; }
-  .stat-row .label { color: var(--ink-mute); }
-  .stat-row .val { font-weight: 500; color: var(--ink); }
+  .stat-row .label { color: var(--ink-mute); flex-shrink: 0; }
+  .stat-row .val { font-weight: 500; color: var(--ink); text-align: right; }
 
-  .persona-info-col {
-    padding: 28px 32px;
-  }
+  .persona-info-col { padding: 24px 28px; }
   .persona-name {
     font-family: 'Syne', sans-serif;
-    font-size: 28px;
+    font-size: clamp(20px, 2.5vw, 28px);
     font-weight: 800;
     color: var(--ink);
     letter-spacing: -0.5px;
     margin-bottom: 4px;
   }
-  .persona-role {
-    font-size: 13px;
-    color: var(--ink-mute);
-    margin-bottom: 16px;
-  }
-
+  .persona-role { font-size: 12px; color: var(--ink-mute); margin-bottom: 14px; }
   .quote-block {
     background: var(--hn-orange-light);
     border-left: 3px solid var(--hn-orange);
-    padding: 12px 16px;
+    padding: 11px 14px;
     border-radius: 0 8px 8px 0;
     font-size: 13px;
     font-style: italic;
     color: #7A3800;
     line-height: 1.65;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
-  .quote-block.teal {
-    background: var(--teal-bg);
-    border-left-color: #059669;
-    color: #064E3B;
-  }
-
-  .demo-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-  }
+  .demo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .demo-box {
     background: var(--surface-warm);
     border: 1px solid var(--border-soft);
     border-radius: 8px;
-    padding: 10px 12px;
+    padding: 9px 11px;
   }
-  .demo-box .dlabel {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.07em;
-    color: var(--ink-mute);
-    margin-bottom: 4px;
-  }
-  .demo-box .dval {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1.5;
-  }
+  .demo-box .dlabel { font-size: 10px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-mute); margin-bottom: 3px; }
+  .demo-box .dval { font-size: 12px; font-weight: 500; color: var(--ink); line-height: 1.4; }
 
-  /* ─── PERSONA BODY ────────────────────────────── */
-  .persona-body {
-    padding: 28px 32px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    border-bottom: 1px solid var(--border-soft);
-  }
-
+  /* ─── SECTION LABEL ───────────────────────────── */
+  .card-section-label { padding: 20px 28px 0; }
   .section-title {
     font-family: 'Syne', sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -289,22 +219,23 @@
     align-items: center;
     gap: 8px;
   }
-  .section-title::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ─── PSYCHOGRAPHICS ──────────────────────────── */
+  .persona-body {
+    padding: 20px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    border-bottom: 1px solid var(--border-soft);
   }
-
-  .psych-section { grid-column: 1 / -1; }
-
   .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
   .tag {
     display: inline-flex;
     align-items: center;
     font-size: 11px;
     font-weight: 500;
-    padding: 4px 11px;
+    padding: 4px 10px;
     border-radius: 99px;
     border: 1px solid transparent;
   }
@@ -314,21 +245,41 @@
   .tag.coral { background: var(--coral-bg); color: var(--coral-text); border-color: #FECACA; }
   .tag.green { background: var(--green-bg); color: var(--green-text); border-color: #BBF7D0; }
 
-  /* ─── GOALS & PAIN ────────────────────────────── */
-  .persona-goals {
-    padding: 0 32px 28px;
+  /* ─── ENVIRONMENT ─────────────────────────────── */
+  .persona-env {
+    padding: 0 28px 24px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
     border-bottom: 1px solid var(--border-soft);
   }
+  .env-card { background: var(--surface-warm); border: 1px solid var(--border-soft); border-radius: 8px; padding: 11px 13px; }
+  .env-card .ec-label { font-size: 10px; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-mute); margin-bottom: 5px; }
+  .env-card .ec-val { font-size: 12px; color: var(--ink); line-height: 1.55; }
 
-  .bullet-list { display: flex; flex-direction: column; gap: 8px; }
+  /* ─── GOALS & PAIN ────────────────────────────── */
+  .persona-goals {
+    padding: 0 28px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .goals-label {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 10px;
+  }
+  .bullet-list { display: flex; flex-direction: column; gap: 7px; }
   .bullet-item {
     display: flex;
     align-items: flex-start;
-    gap: 10px;
-    font-size: 13px;
+    gap: 9px;
+    font-size: 12px;
     color: var(--ink-soft);
     line-height: 1.55;
     padding: 8px 10px;
@@ -336,54 +287,17 @@
     border-radius: 7px;
     border: 1px solid var(--border-soft);
   }
-  .bullet-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-top: 5px;
-    flex-shrink: 0;
-  }
+  .bullet-dot { width: 7px; height: 7px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
   .dot-orange { background: var(--hn-orange); }
-  .dot-teal   { background: #059669; }
   .dot-red    { background: #DC2626; }
 
-  /* ─── ENVIRONMENT ─────────────────────────────── */
-  .persona-env {
-    padding: 0 32px 28px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    border-bottom: 1px solid var(--border-soft);
-  }
-
-  .env-card {
-    background: var(--surface-warm);
-    border: 1px solid var(--border-soft);
-    border-radius: 8px;
-    padding: 12px 14px;
-  }
-  .env-card .ec-label {
-    font-size: 10px;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 6px;
-  }
-  .env-card .ec-val {
-    font-size: 12px;
-    color: var(--ink);
-    line-height: 1.55;
-  }
-
   /* ─── SCENARIO ────────────────────────────────── */
-  .persona-scenario {
-    padding: 24px 32px 28px;
-  }
+  .persona-scenario { padding: 20px 28px 26px; }
   .scenario-box {
     background: var(--surface-warm);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 18px 20px;
+    padding: 18px 18px 18px 48px;
     font-size: 13px;
     color: var(--ink-soft);
     line-height: 1.8;
@@ -392,41 +306,96 @@
   .scenario-box::before {
     content: '"';
     font-family: 'Syne', sans-serif;
-    font-size: 64px;
+    font-size: 60px;
     color: var(--hn-orange-mid);
     position: absolute;
-    top: -8px;
-    left: 16px;
+    top: -4px;
+    left: 14px;
     line-height: 1;
-  }
-  .scenario-box.teal::before { color: #A7F3D0; }
-  .scenario-text { padding-left: 32px; }
-
-  /* ─── SECTION PADDING TOP ─────────────────────── */
-  .persona-body,
-  .persona-goals,
-  .persona-env { padding-top: 24px; }
-
-  /* ─── DIVIDER LABEL ───────────────────────────── */
-  .card-section-label {
-    padding: 14px 32px 0;
+    pointer-events: none;
   }
 
   /* ─── FOOTER ──────────────────────────────────── */
   .page-footer {
     text-align: center;
-    padding: 32px;
+    padding: 28px 16px;
     font-size: 11px;
     color: var(--ink-faint);
     border-top: 1px solid var(--border);
-    letter-spacing: 0.05em;
+    letter-spacing: 0.04em;
   }
   .page-footer strong { color: var(--ink-mute); font-weight: 500; }
+
+  /* ══════════════════════════════════════════════
+     TABLET — max 768px
+  ══════════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .hn-topbar { padding: 10px 18px; }
+    .header-body { padding: 28px 18px 24px; flex-direction: column; align-items: flex-start; }
+    .header-meta { text-align: left; }
+    .main { padding: 28px 16px 56px; gap: 32px; }
+
+    .persona-top { grid-template-columns: 1fr; }
+    .persona-photo-col {
+      border-right: none;
+      border-bottom: 1px solid var(--border-soft);
+      flex-direction: row;
+      align-items: flex-start;
+      padding: 20px 18px;
+      gap: 18px;
+    }
+    .photo-frame { width: 90px; height: 90px; flex-shrink: 0; }
+    .photo-stats { flex: 1; min-width: 0; }
+
+    .persona-info-col { padding: 20px 18px; }
+    .demo-grid { grid-template-columns: repeat(2, 1fr); }
+
+    .persona-body { grid-template-columns: 1fr; padding: 20px 18px; gap: 16px; }
+
+    .persona-env { grid-template-columns: repeat(2, 1fr); padding: 0 18px 20px; }
+
+    .persona-goals { grid-template-columns: 1fr; padding: 0 18px 20px; gap: 16px; }
+
+    .card-section-label { padding: 16px 18px 0; }
+    .persona-scenario { padding: 16px 18px 22px; }
+  }
+
+  /* ══════════════════════════════════════════════
+     MOBILE — max 480px
+  ══════════════════════════════════════════════ */
+  @media (max-width: 480px) {
+    .hn-topbar { padding: 9px 14px; }
+    .hn-topbar-title { font-size: 11px; }
+    .header-body { padding: 20px 14px 18px; }
+    .header-desc { display: none; }
+    .main { padding: 18px 10px 44px; gap: 22px; }
+
+    .persona-photo-col {
+      flex-direction: column;
+      align-items: center;
+      padding: 18px 14px;
+    }
+    .photo-frame { width: 96px; height: 96px; }
+    .photo-stats { width: 100%; }
+
+    .persona-info-col { padding: 16px 14px; }
+    .demo-grid { grid-template-columns: 1fr; }
+
+    .persona-body { padding: 16px 14px; }
+
+    .persona-env { grid-template-columns: 1fr; padding: 0 14px 18px; }
+
+    .persona-goals { padding: 0 14px 18px; }
+
+    .card-section-label { padding: 14px 14px 0; }
+    .persona-scenario { padding: 14px 14px 20px; }
+    .scenario-box { padding: 14px 14px 14px 38px; font-size: 12px; }
+    .scenario-box::before { font-size: 46px; left: 10px; }
+  }
 </style>
 </head>
 <body>
 
-<!-- ═══ HEADER ════════════════════════════════════════════════════════════ -->
 <header class="site-header">
   <div class="hn-topbar">
     <div class="hn-logo-box">Y</div>
@@ -445,21 +414,16 @@
   </div>
 </header>
 
-<!-- ═══ MAIN ══════════════════════════════════════════════════════════════ -->
 <main class="main">
 
-  <!-- ══════════════════════════════════════════════════════════════════════
-       PERSONA 1 — POWER USER
-  ══════════════════════════════════════════════════════════════════════════ -->
+  <!-- PERSONA 1 — USER -->
   <article class="persona-card">
     <div class="persona-stripe"></div>
-
-    <!-- TOP ROW: Photo + Core Info -->
     <div class="persona-top">
       <div class="persona-photo-col">
         <span class="persona-badge">Persona 01</span>
         <div class="photo-frame">
-          <img src="./assets/Saurav.jpeg" alt="Abhay Sharma" style="width:120px; height:120px; border-radius:12px; object-fit:cover; display:block;">
+          <img src="./assets/Saurav.jpeg" alt="Kumar Saurav" style="width:100%; height:100%; object-fit:cover; display:block;">
         </div>
         <div class="photo-stats">
           <div class="stat-row"><span class="label">Age</span><span class="val">23</span></div>
@@ -470,33 +434,20 @@
           <div class="stat-row"><span class="label">Income</span><span class="val">₹28–35 LPA</span></div>
         </div>
       </div>
-
       <div class="persona-info-col">
         <h2 class="persona-name">Kumar Saurav</h2>
         <p class="persona-role">Software Developer · Full Stack Development · BTM, Bengaluru</p>
-
         <div class="quote-block">
           "I check Hacker News every single morning — it's how I know what the industry is thinking before I write a single line of code."
         </div>
-
         <div class="demo-grid">
-          <div class="demo-box">
-            <div class="dlabel">Job Title</div>
-            <div class="dval">Software Developer</div>
-          </div>
-          <div class="demo-box">
-            <div class="dlabel">Experience</div>
-            <div class="dval">Fresher</div>
-          </div>
-          <div class="demo-box">
-            <div class="dlabel">Work Setting</div>
-            <div class="dval">Hybrid — Office + Remote</div>
-          </div>
+          <div class="demo-box"><div class="dlabel">Job Title</div><div class="dval">Software Developer</div></div>
+          <div class="demo-box"><div class="dlabel">Experience</div><div class="dval">Fresher</div></div>
+          <div class="demo-box"><div class="dlabel">Work Setting</div><div class="dval">Hybrid — Office + Remote</div></div>
         </div>
       </div>
     </div>
 
-    <!-- PSYCHOGRAPHICS -->
     <div class="card-section-label">
       <div class="section-title">Psychographics — Interests &amp; Attitudes</div>
     </div>
@@ -537,31 +488,21 @@
       </div>
     </div>
 
-    <!-- ENVIRONMENT -->
-    <div class="card-section-label" style="padding-top:24px;">
+    <div class="card-section-label" style="padding-top:20px;">
       <div class="section-title">User Environment</div>
     </div>
     <div class="persona-env">
-      <div class="env-card">
-        <div class="ec-label">Primary Device</div>
-        <div class="ec-val">MacBook Pro 14" at office. iPhone 15 during commute.</div>
-      </div>
-      <div class="env-card">
-        <div class="ec-label">How He Uses HN</div>
-        <div class="ec-val">Browser on desktop. Telescope app on mobile. Reads comments daily.</div>
-      </div>
-      <div class="env-card">
-        <div class="ec-label">Social Context</div>
-        <div class="ec-val">Shares links to team Slack. Discusses HN threads with colleagues at lunch.</div>
-      </div>
+      <div class="env-card"><div class="ec-label">Primary Device</div><div class="ec-val">MacBook Pro 14" at office. iPhone 15 during commute.</div></div>
+      <div class="env-card"><div class="ec-label">How He Uses HN</div><div class="ec-val">Browser on desktop. Telescope app on mobile. Reads comments daily.</div></div>
+      <div class="env-card"><div class="ec-label">Social Context</div><div class="ec-val">Shares links to team Slack. Discusses HN threads with colleagues at lunch.</div></div>
     </div>
 
-    <!-- GOALS & PAIN POINTS -->
     <div class="card-section-label">
       <div class="section-title">End Goals on Hacker News</div>
     </div>
     <div class="persona-goals">
       <div>
+        <div class="goals-label">Goals</div>
         <div class="bullet-list">
           <div class="bullet-item"><div class="bullet-dot dot-orange"></div>Stay ahead of tech trends before they go mainstream</div>
           <div class="bullet-item"><div class="bullet-dot dot-orange"></div>Discover libraries and tools worth adopting at work</div>
@@ -571,7 +512,7 @@
         </div>
       </div>
       <div>
-        <div style="font-family:'Syne',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:12px;">Pain Points</div>
+        <div class="goals-label">Pain Points</div>
         <div class="bullet-list">
           <div class="bullet-item"><div class="bullet-dot dot-red"></div>Too much noise — hard to find real signal quickly</div>
           <div class="bullet-item"><div class="bullet-dot dot-red"></div>No personalisation — same feed for every user</div>
@@ -582,29 +523,23 @@
       </div>
     </div>
 
-    <!-- SCENARIO -->
     <div class="persona-scenario">
       <div class="section-title">Day-in-the-Life Scenario</div>
       <div class="scenario-box">
-        <div class="scenario-text">
-          Every weekday at 8am, Saurav opens Hacker News on his phone during his commute to the office. He skims the top 20 stories in about 10 minutes — upvoting a few, saving 2 or 3 to read properly at lunch. By mid-morning he's shared at least one link in the engineering team's Slack with a short comment. On weekends, he dives deep into "Show HN" posts hunting for CLI tools and LLM wrappers he can experiment with in his side project. Once a month, he scrolls the entire "Who is Hiring" thread and starts bookmarking roles that match where he wants to grow.
-        </div>
+        Every weekday at 8am, Saurav opens Hacker News on his phone during his commute to the office. He skims the top 20 stories in about 10 minutes — upvoting a few, saving 2 or 3 to read properly at lunch. By mid-morning he's shared at least one link in the engineering team's Slack with a short comment. On weekends, he dives deep into "Show HN" posts hunting for CLI tools and LLM wrappers he can experiment with in his side project. Once a month, he scrolls the entire "Who is Hiring" thread and starts bookmarking roles that match where he wants to grow.
       </div>
     </div>
   </article>
 
 
-  <!-- ══════════════════════════════════════════════════════════════════════
-       PERSONA 2 — CREATOR
-  ══════════════════════════════════════════════════════════════════════════ -->
+  <!-- PERSONA 2 — CREATOR -->
   <article class="persona-card">
     <div class="persona-stripe" style="background:#7C3AED;"></div>
-
     <div class="persona-top">
       <div class="persona-photo-col">
         <span class="persona-badge" style="background:#F5F3FF; color:#6D28D9; border-color:#DDD6FE;">Persona 02</span>
         <div class="photo-frame">
-         <img src="./assets/AbhaySharma.jpeg" alt="Abhay Sharma" style="width:120px; height:120px; border-radius:12px; object-fit:cover; display:block;">
+          <img src="./assets/AbhaySharma.jpeg" alt="Abhay Sharma" style="width:100%; height:100%; object-fit:cover; display:block;">
         </div>
         <div class="photo-stats">
           <div class="stat-row"><span class="label">Age</span><span class="val">27</span></div>
@@ -615,39 +550,26 @@
           <div class="stat-row"><span class="label">Income</span><span class="val">₹12–18 LPA + freelance</span></div>
         </div>
       </div>
-
       <div class="persona-info-col">
         <h2 class="persona-name">Abhay Sharma</h2>
         <p class="persona-role">Full-Stack Developer &amp; Independent Content Creator · Pune</p>
-
         <div class="quote-block" style="background:#F5F3FF; border-left-color:#7C3AED; color:#4C1D95;">
           "I don't just read HN — I post on it. Every article I publish, every project I ship, HN is where I go to find out if it actually matters."
         </div>
-
         <div class="demo-grid">
-          <div class="demo-box">
-            <div class="dlabel">Job Title</div>
-            <div class="dval">Full-Stack Dev &amp; Tech Blogger</div>
-          </div>
-          <div class="demo-box">
-            <div class="dlabel">Background</div>
-            <div class="dval">3 yrs dev experience, runs a personal tech blog with 8k subscribers</div>
-          </div>
-          <div class="demo-box">
-            <div class="dlabel">Content Output</div>
-            <div class="dval">2–3 posts/month on blog + open source projects on GitHub</div>
-          </div>
+          <div class="demo-box"><div class="dlabel">Job Title</div><div class="dval">Full-Stack Dev &amp; Tech Blogger</div></div>
+          <div class="demo-box"><div class="dlabel">Background</div><div class="dval">3 yrs exp, tech blog with 8k subscribers</div></div>
+          <div class="demo-box"><div class="dlabel">Content Output</div><div class="dval">2–3 posts/month + open source on GitHub</div></div>
         </div>
       </div>
     </div>
 
-    <!-- PSYCHOGRAPHICS -->
     <div class="card-section-label">
       <div class="section-title">Psychographics — Interests &amp; Attitudes</div>
     </div>
     <div class="persona-body" style="border-bottom:none; padding-bottom:0;">
       <div>
-        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:10px;">Abhay is ambitious and reputation-driven. He writes deep-dive technical articles and builds small open-source tools, then uses HN as his primary distribution channel. He measures success not just in page views but in the quality of comments his posts receive. He believes a single well-received HN post can change your career trajectory and actively studies what gets upvoted.</p>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:10px;">Abhay is ambitious and reputation-driven. He writes deep-dive technical articles and builds small open-source tools, then uses HN as his primary distribution channel. He measures success not just in page views but in the quality of comments his posts receive. He believes a single well-received HN post can change your career trajectory.</p>
         <div class="tags-wrap">
           <span class="tag blue">Technical Writing</span>
           <span class="tag blue">Open Source</span>
@@ -663,49 +585,39 @@
         <div style="display:flex; flex-direction:column; gap:7px;">
           <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
             <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:95%; height:100%; background:#7C3AED; border-radius:99px;"></div></div>
-            <span style="min-width:140px;">Build public reputation</span>
+            <span style="min-width:130px;">Build public reputation</span>
           </div>
           <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
             <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:85%; height:100%; background:#7C3AED; border-radius:99px;"></div></div>
-            <span style="min-width:140px;">Drive blog traffic</span>
+            <span style="min-width:130px;">Drive blog traffic</span>
           </div>
           <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
             <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:72%; height:100%; background:#7C3AED; border-radius:99px;"></div></div>
-            <span style="min-width:140px;">Get quality feedback</span>
+            <span style="min-width:130px;">Get quality feedback</span>
           </div>
           <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
             <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:58%; height:100%; background:#7C3AED; border-radius:99px;"></div></div>
-            <span style="min-width:140px;">Land freelance clients</span>
+            <span style="min-width:130px;">Land freelance clients</span>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- ENVIRONMENT -->
-    <div class="card-section-label" style="padding-top:24px;">
+    <div class="card-section-label" style="padding-top:20px;">
       <div class="section-title">User Environment</div>
     </div>
     <div class="persona-env">
-      <div class="env-card">
-        <div class="ec-label">Primary Device</div>
-        <div class="ec-val">Custom-built desktop PC at home. Uses a secondary laptop for writing while travelling.</div>
-      </div>
-      <div class="env-card">
-        <div class="ec-label">How He Uses HN</div>
-        <div class="ec-val">Both reader and active poster. Submits his own articles via "Submit" + monitors comments obsessively after posting.</div>
-      </div>
-      <div class="env-card">
-        <div class="ec-label">Social Context</div>
-        <div class="ec-val">Part of a small indie-hackers Discord. Cross-posts HN threads to his newsletter audience.</div>
-      </div>
+      <div class="env-card"><div class="ec-label">Primary Device</div><div class="ec-val">Custom-built desktop PC at home. Laptop for writing while travelling.</div></div>
+      <div class="env-card"><div class="ec-label">How He Uses HN</div><div class="ec-val">Both reader and active poster. Submits articles and monitors comments obsessively after posting.</div></div>
+      <div class="env-card"><div class="ec-label">Social Context</div><div class="ec-val">Part of an indie-hackers Discord. Cross-posts HN threads to his newsletter audience.</div></div>
     </div>
 
-    <!-- GOALS & PAIN POINTS -->
     <div class="card-section-label">
       <div class="section-title">End Goals on Hacker News</div>
     </div>
     <div class="persona-goals">
       <div>
+        <div class="goals-label">Goals</div>
         <div class="bullet-list">
           <div class="bullet-item"><div class="bullet-dot" style="background:#7C3AED;"></div>Submit original articles and projects to reach a technical audience</div>
           <div class="bullet-item"><div class="bullet-dot" style="background:#7C3AED;"></div>Get high-quality upvotes and comments to validate content quality</div>
@@ -715,7 +627,7 @@
         </div>
       </div>
       <div>
-        <div style="font-family:'Syne',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:12px;">Pain Points</div>
+        <div class="goals-label">Pain Points</div>
         <div class="bullet-list">
           <div class="bullet-item"><div class="bullet-dot dot-red"></div>Submissions get zero traction — no way to understand why</div>
           <div class="bullet-item"><div class="bullet-dot dot-red"></div>No analytics — can't see who viewed or engaged with his post</div>
@@ -726,14 +638,11 @@
       </div>
     </div>
 
-    <!-- SCENARIO -->
     <div class="persona-scenario">
       <div class="section-title">Day-in-the-Life Scenario</div>
-      <div class="scenario-box" style="background:var(--surface-warm);">
-        <div style="position:absolute; top:-8px; left:16px; font-family:'Syne',sans-serif; font-size:64px; color:#DDD6FE; line-height:1;">"</div>
-        <div class="scenario-text">
-          Abhay spends his evenings writing — every 2 weeks he completes a deep-dive article on a topic like "Why my Rust rewrite was slower than Node" or "I built a mini-browser in 500 lines". When he's ready to publish, he submits it to HN at 8am on a weekday, convinced that's the optimal time. He then refreshes the HN page obsessively for the next 3 hours watching the upvote count. If a post catches fire, his blog traffic jumps 10x for the day and his newsletter gains 200 new subscribers by evening. If it doesn't, he spends the next few days wondering whether the title was wrong, the timing was off, or HN's algorithm shadowbanned him.
-        </div>
+      <div class="scenario-box" style="border-color:#DDD6FE;">
+        <span style="position:absolute; top:-4px; left:14px; font-family:'Syne',sans-serif; font-size:60px; color:#DDD6FE; line-height:1; pointer-events:none;">"</span>
+        Abhay spends his evenings writing — every 2 weeks he completes a deep-dive article on a topic like "Why my Rust rewrite was slower than Node" or "I built a mini-browser in 500 lines". When he's ready to publish, he submits it to HN at 8am on a weekday, convinced that's the optimal time. He then refreshes the HN page obsessively for the next 3 hours watching the upvote count. If a post catches fire, his blog traffic jumps 10x for the day and his newsletter gains 200 new subscribers by evening. If it doesn't, he spends the next few days wondering whether the title was wrong, the timing was off, or HN's algorithm shadowbanned him.
       </div>
     </div>
   </article>
