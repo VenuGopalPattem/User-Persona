@@ -4,7 +4,7 @@ User persona document created as part of a Hacker News UX research project.
 
 ## What's inside
 
-- `hn_user_personas.html` — the main persona document, open in any browser
+- `index.html` — the main persona document, open in any browser
 - `assets/` — persona photos
 
 ## Personas
