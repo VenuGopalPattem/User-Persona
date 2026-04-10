@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hacker News — User Personas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --hn-orange: #FF6600;
+    --hn-orange-light: #FFF0E6;
+    --hn-orange-mid: #FFD4B3;
+    --ink: #1A1208;
+    --ink-soft: #4A3F35;
+    --ink-mute: #8C7B6E;
+    --ink-faint: #C4B5A8;
+    --surface: #FDFAF7;
+    --surface-warm: #F5EFE8;
+    --surface-card: #FFFFFF;
+    --border: #E8DDD4;
+    --border-soft: #F0E8E0;
+    --blue-bg: #EEF4FF;
+    --blue-text: #1D4ED8;
+    --teal-bg: #ECFDF5;
+    --teal-text: #065F46;
+    --amber-bg: #FFFBEB;
+    --amber-text: #92400E;
+    --coral-bg: #FFF5F5;
+    --coral-text: #991B1B;
+    --green-bg: #F0FDF4;
+    --green-text: #14532D;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--surface);
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ─── HEADER ─────────────────────────────────── */
+  .site-header {
+    background: var(--ink);
+    padding: 0;
+  }
+  .hn-topbar {
+    background: var(--hn-orange);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 48px;
+  }
+  .hn-logo-box {
+    background: white;
+    color: var(--hn-orange);
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: -0.5px;
+  }
+  .hn-topbar-title {
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+  }
+  .header-body {
+    padding: 48px 48px 40px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .header-eyebrow {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--hn-orange);
+    margin-bottom: 10px;
+  }
+  .header-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 42px;
+    font-weight: 800;
+    color: #FFFFFF;
+    line-height: 1.1;
+    letter-spacing: -1px;
+  }
+  .header-title span { color: var(--hn-orange); }
+  .header-desc {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #A89B8E;
+    max-width: 480px;
+    line-height: 1.7;
+  }
+  .header-meta {
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .meta-item {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6B5E54;
+    margin-bottom: 4px;
+  }
+  .meta-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: white;
+  }
+
+  /* ─── MAIN LAYOUT ─────────────────────────────── */
+  .main {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  /* ─── PERSONA CARD ────────────────────────────── */
+  .persona-card {
+    background: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(26,18,8,0.06);
+  }
+
+  .persona-stripe {
+    height: 5px;
+    background: var(--hn-orange);
+  }
+  .persona-stripe.teal { background: #059669; }
+
+  /* ─── PERSONA TOP ─────────────────────────────── */
+  .persona-top {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .persona-photo-col {
+    border-right: 1px solid var(--border-soft);
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    background: var(--surface-warm);
+  }
+
+  .photo-frame {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    border: 2px dashed var(--border);
+    background: var(--surface-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--ink-faint);
+  }
+  .photo-frame svg { opacity: 0.4; }
+  .photo-frame span { font-size: 10px; letter-spacing: 0.05em; text-transform: uppercase; }
+
+  .persona-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 99px;
+    background: var(--hn-orange-light);
+    color: var(--hn-orange);
+    border: 1px solid var(--hn-orange-mid);
+  }
+  .persona-badge.teal {
+    background: var(--teal-bg);
+    color: var(--teal-text);
+    border-color: #A7F3D0;
+  }
+
+  .photo-stats { width: 100%; }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 11px;
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-row .label { color: var(--ink-mute); }
+  .stat-row .val { font-weight: 500; color: var(--ink); }
+
+  .persona-info-col {
+    padding: 28px 32px;
+  }
+  .persona-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--ink);
+    letter-spacing: -0.5px;
+    margin-bottom: 4px;
+  }
+  .persona-role {
+    font-size: 13px;
+    color: var(--ink-mute);
+    margin-bottom: 16px;
+  }
+
+  .quote-block {
+    background: var(--hn-orange-light);
+    border-left: 3px solid var(--hn-orange);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    font-size: 13px;
+    font-style: italic;
+    color: #7A3800;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+  .quote-block.teal {
+    background: var(--teal-bg);
+    border-left-color: #059669;
+    color: #064E3B;
+  }
+
+  .demo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+  .demo-box {
+    background: var(--surface-warm);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    padding: 10px 12px;
+  }
+  .demo-box .dlabel {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--ink-mute);
+    margin-bottom: 4px;
+  }
+  .demo-box .dval {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  /* ─── PERSONA BODY ────────────────────────────── */
+  .persona-body {
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .psych-section { grid-column: 1 / -1; }
+
+  .tags-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 11px;
+    border-radius: 99px;
+    border: 1px solid transparent;
+  }
+  .tag.blue  { background: var(--blue-bg);  color: var(--blue-text);  border-color: #BFDBFE; }
+  .tag.teal  { background: var(--teal-bg);  color: var(--teal-text);  border-color: #A7F3D0; }
+  .tag.amber { background: var(--amber-bg); color: var(--amber-text); border-color: #FDE68A; }
+  .tag.coral { background: var(--coral-bg); color: var(--coral-text); border-color: #FECACA; }
+  .tag.green { background: var(--green-bg); color: var(--green-text); border-color: #BBF7D0; }
+
+  /* ─── GOALS & PAIN ────────────────────────────── */
+  .persona-goals {
+    padding: 0 32px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .bullet-list { display: flex; flex-direction: column; gap: 8px; }
+  .bullet-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+    padding: 8px 10px;
+    background: var(--surface-warm);
+    border-radius: 7px;
+    border: 1px solid var(--border-soft);
+  }
+  .bullet-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 5px;
+    flex-shrink: 0;
+  }
+  .dot-orange { background: var(--hn-orange); }
+  .dot-teal   { background: #059669; }
+  .dot-red    { background: #DC2626; }
+
+  /* ─── ENVIRONMENT ─────────────────────────────── */
+  .persona-env {
+    padding: 0 32px 28px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 12px;
+    border-bottom: 1px solid var(--border-soft);
+  }
+
+  .env-card {
+    background: var(--surface-warm);
+    border: 1px solid var(--border-soft);
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .env-card .ec-label {
+    font-size: 10px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 6px;
+  }
+  .env-card .ec-val {
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+
+  /* ─── SCENARIO ────────────────────────────────── */
+  .persona-scenario {
+    padding: 24px 32px 28px;
+  }
+  .scenario-box {
+    background: var(--surface-warm);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.8;
+    position: relative;
+  }
+  .scenario-box::before {
+    content: '"';
+    font-family: 'Syne', sans-serif;
+    font-size: 64px;
+    color: var(--hn-orange-mid);
+    position: absolute;
+    top: -8px;
+    left: 16px;
+    line-height: 1;
+  }
+  .scenario-box.teal::before { color: #A7F3D0; }
+  .scenario-text { padding-left: 32px; }
+
+  /* ─── SECTION PADDING TOP ─────────────────────── */
+  .persona-body,
+  .persona-goals,
+  .persona-env { padding-top: 24px; }
+
+  /* ─── DIVIDER LABEL ───────────────────────────── */
+  .card-section-label {
+    padding: 14px 32px 0;
+  }
+
+  /* ─── FOOTER ──────────────────────────────────── */
+  .page-footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 11px;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+  .page-footer strong { color: var(--ink-mute); font-weight: 500; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ════════════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="hn-topbar">
+    <div class="hn-logo-box">Y</div>
+    <span class="hn-topbar-title">Hacker News — UX Research Project</span>
+  </div>
+  <div class="header-body">
+    <div>
+      <div class="header-eyebrow">User Research · 2024</div>
+      <h1 class="header-title">User <span>Personas</span></h1>
+      <p class="header-desc">Fictional but research-backed representations of Hacker News's core audience segments — built to guide design decisions and keep the product team focused on real human needs.</p>
+    </div>
+    <div class="header-meta">
+      <div class="meta-item">Total Personas</div>
+      <div class="meta-value">02</div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ MAIN ══════════════════════════════════════════════════════════════ -->
+<main class="main">
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       PERSONA 1 — POWER USER
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <article class="persona-card">
+    <div class="persona-stripe"></div>
+
+    <!-- TOP ROW: Photo + Core Info -->
+    <div class="persona-top">
+      <div class="persona-photo-col">
+        <span class="persona-badge">Persona 01</span>
+        <div class="photo-frame">
+          <img src="./assets/Saurav.jpeg" alt="Abhay Sharma" style="width:120px; height:120px; border-radius:12px; object-fit:cover; display:block;">
+        </div>
+        <div class="photo-stats">
+          <div class="stat-row"><span class="label">Age</span><span class="val">23</span></div>
+          <div class="stat-row"><span class="label">Gender</span><span class="val">Male</span></div>
+          <div class="stat-row"><span class="label">Location</span><span class="val">Bengaluru</span></div>
+          <div class="stat-row"><span class="label">Education</span><span class="val">B.Tech CSE</span></div>
+          <div class="stat-row"><span class="label">Status</span><span class="val">Single</span></div>
+          <div class="stat-row"><span class="label">Income</span><span class="val">₹28–35 LPA</span></div>
+        </div>
+      </div>
+
+      <div class="persona-info-col">
+        <h2 class="persona-name">Kumar Saurav</h2>
+        <p class="persona-role">Software Developer · Full Stack Development · BTM, Bengaluru</p>
+
+        <div class="quote-block">
+          "I check Hacker News every single morning — it's how I know what the industry is thinking before I write a single line of code."
+        </div>
+
+        <div class="demo-grid">
+          <div class="demo-box">
+            <div class="dlabel">Job Title</div>
+            <div class="dval">Software Developer</div>
+          </div>
+          <div class="demo-box">
+            <div class="dlabel">Experience</div>
+            <div class="dval">Fresher</div>
+          </div>
+          <div class="demo-box">
+            <div class="dlabel">Work Setting</div>
+            <div class="dval">Hybrid — Office + Remote</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PSYCHOGRAPHICS -->
+    <div class="card-section-label">
+      <div class="section-title">Psychographics — Interests &amp; Attitudes</div>
+    </div>
+    <div class="persona-body" style="border-bottom:none; padding-bottom:0;">
+      <div>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:10px;">Saurav is deeply curious and self-driven. He values depth over breadth and prefers primary sources to newsletters or summaries. As a fresher he's eager to prove himself, and trusts the HN community's signal-to-noise ratio over mainstream tech media to guide his learning.</p>
+        <div class="tags-wrap">
+          <span class="tag blue">AI / ML</span>
+          <span class="tag blue">Open Source</span>
+          <span class="tag blue">Dev Tools</span>
+          <span class="tag teal">Startups</span>
+          <span class="tag teal">System Design</span>
+          <span class="tag amber">Career Growth</span>
+          <span class="tag amber">Side Projects</span>
+          <span class="tag coral">Skeptical of Hype</span>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-mute); margin-bottom:10px;">Motivations</p>
+        <div style="display:flex; flex-direction:column; gap:7px;">
+          <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
+            <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:92%; height:100%; background:var(--hn-orange); border-radius:99px;"></div></div>
+            <span style="min-width:120px;">Stay technically sharp</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
+            <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:78%; height:100%; background:var(--hn-orange); border-radius:99px;"></div></div>
+            <span style="min-width:120px;">Discover new tools</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
+            <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:65%; height:100%; background:var(--hn-orange); border-radius:99px;"></div></div>
+            <span style="min-width:120px;">Explore job leads</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
+            <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:55%; height:100%; background:var(--hn-orange); border-radius:99px;"></div></div>
+            <span style="min-width:120px;">Build side projects</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENVIRONMENT -->
+    <div class="card-section-label" style="padding-top:24px;">
+      <div class="section-title">User Environment</div>
+    </div>
+    <div class="persona-env">
+      <div class="env-card">
+        <div class="ec-label">Primary Device</div>
+        <div class="ec-val">MacBook Pro 14" at office. iPhone 15 during commute.</div>
+      </div>
+      <div class="env-card">
+        <div class="ec-label">How He Uses HN</div>
+        <div class="ec-val">Browser on desktop. Telescope app on mobile. Reads comments daily.</div>
+      </div>
+      <div class="env-card">
+        <div class="ec-label">Social Context</div>
+        <div class="ec-val">Shares links to team Slack. Discusses HN threads with colleagues at lunch.</div>
+      </div>
+    </div>
+
+    <!-- GOALS & PAIN POINTS -->
+    <div class="card-section-label">
+      <div class="section-title">End Goals on Hacker News</div>
+    </div>
+    <div class="persona-goals">
+      <div>
+        <div class="bullet-list">
+          <div class="bullet-item"><div class="bullet-dot dot-orange"></div>Stay ahead of tech trends before they go mainstream</div>
+          <div class="bullet-item"><div class="bullet-dot dot-orange"></div>Discover libraries and tools worth adopting at work</div>
+          <div class="bullet-item"><div class="bullet-dot dot-orange"></div>Find high-quality job leads through "Who is Hiring" threads</div>
+          <div class="bullet-item"><div class="bullet-dot dot-orange"></div>Watch what founders discuss to evaluate startup ideas</div>
+          <div class="bullet-item"><div class="bullet-dot dot-orange"></div>Learn from "Ask HN" threads and real practitioner debates</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Syne',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:12px;">Pain Points</div>
+        <div class="bullet-list">
+          <div class="bullet-item"><div class="bullet-dot dot-red"></div>Too much noise — hard to find real signal quickly</div>
+          <div class="bullet-item"><div class="bullet-dot dot-red"></div>No personalisation — same feed for every user</div>
+          <div class="bullet-item"><div class="bullet-dot dot-red"></div>No reliable bookmarking or read-later sync across devices</div>
+          <div class="bullet-item"><div class="bullet-dot dot-red"></div>Comment threads get toxic on non-technical posts</div>
+          <div class="bullet-item"><div class="bullet-dot dot-red"></div>Can't filter "Who is Hiring" by tech stack or location</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENARIO -->
+    <div class="persona-scenario">
+      <div class="section-title">Day-in-the-Life Scenario</div>
+      <div class="scenario-box">
+        <div class="scenario-text">
+          Every weekday at 8am, Saurav opens Hacker News on his phone during his commute to the office. He skims the top 20 stories in about 10 minutes — upvoting a few, saving 2 or 3 to read properly at lunch. By mid-morning he's shared at least one link in the engineering team's Slack with a short comment. On weekends, he dives deep into "Show HN" posts hunting for CLI tools and LLM wrappers he can experiment with in his side project. Once a month, he scrolls the entire "Who is Hiring" thread and starts bookmarking roles that match where he wants to grow.
+        </div>
+      </div>
+    </div>
+  </article>
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       PERSONA 2 — CREATOR
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <article class="persona-card">
+    <div class="persona-stripe" style="background:#7C3AED;"></div>
+
+    <div class="persona-top">
+      <div class="persona-photo-col">
+        <span class="persona-badge" style="background:#F5F3FF; color:#6D28D9; border-color:#DDD6FE;">Persona 02</span>
+        <div class="photo-frame">
+         <img src="./assets/AbhaySharma.jpeg" alt="Abhay Sharma" style="width:120px; height:120px; border-radius:12px; object-fit:cover; display:block;">
+        </div>
+        <div class="photo-stats">
+          <div class="stat-row"><span class="label">Age</span><span class="val">27</span></div>
+          <div class="stat-row"><span class="label">Gender</span><span class="val">Male</span></div>
+          <div class="stat-row"><span class="label">Location</span><span class="val">Pune</span></div>
+          <div class="stat-row"><span class="label">Education</span><span class="val">B.E Computers</span></div>
+          <div class="stat-row"><span class="label">Status</span><span class="val">Single</span></div>
+          <div class="stat-row"><span class="label">Income</span><span class="val">₹12–18 LPA + freelance</span></div>
+        </div>
+      </div>
+
+      <div class="persona-info-col">
+        <h2 class="persona-name">Abhay Sharma</h2>
+        <p class="persona-role">Full-Stack Developer &amp; Independent Content Creator · Pune</p>
+
+        <div class="quote-block" style="background:#F5F3FF; border-left-color:#7C3AED; color:#4C1D95;">
+          "I don't just read HN — I post on it. Every article I publish, every project I ship, HN is where I go to find out if it actually matters."
+        </div>
+
+        <div class="demo-grid">
+          <div class="demo-box">
+            <div class="dlabel">Job Title</div>
+            <div class="dval">Full-Stack Dev &amp; Tech Blogger</div>
+          </div>
+          <div class="demo-box">
+            <div class="dlabel">Background</div>
+            <div class="dval">3 yrs dev experience, runs a personal tech blog with 8k subscribers</div>
+          </div>
+          <div class="demo-box">
+            <div class="dlabel">Content Output</div>
+            <div class="dval">2–3 posts/month on blog + open source projects on GitHub</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PSYCHOGRAPHICS -->
+    <div class="card-section-label">
+      <div class="section-title">Psychographics — Interests &amp; Attitudes</div>
+    </div>
+    <div class="persona-body" style="border-bottom:none; padding-bottom:0;">
+      <div>
+        <p style="font-size:13px; color:var(--ink-soft); margin-bottom:10px;">Abhay is ambitious and reputation-driven. He writes deep-dive technical articles and builds small open-source tools, then uses HN as his primary distribution channel. He measures success not just in page views but in the quality of comments his posts receive. He believes a single well-received HN post can change your career trajectory and actively studies what gets upvoted.</p>
+        <div class="tags-wrap">
+          <span class="tag blue">Technical Writing</span>
+          <span class="tag blue">Open Source</span>
+          <span class="tag blue">Web Performance</span>
+          <span class="tag amber">Personal Branding</span>
+          <span class="tag amber">Audience Growth</span>
+          <span class="tag green">Developer Tools</span>
+          <span class="tag coral">Community Reputation</span>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:11px; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-mute); margin-bottom:10px;">Motivations</p>
+        <div style="display:flex; flex-direction:column; gap:7px;">
+          <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
+            <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:95%; height:100%; background:#7C3AED; border-radius:99px;"></div></div>
+            <span style="min-width:140px;">Build public reputation</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
+            <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:85%; height:100%; background:#7C3AED; border-radius:99px;"></div></div>
+            <span style="min-width:140px;">Drive blog traffic</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
+            <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:72%; height:100%; background:#7C3AED; border-radius:99px;"></div></div>
+            <span style="min-width:140px;">Get quality feedback</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:8px; font-size:12px; color:var(--ink-soft);">
+            <div style="flex:1; background:var(--surface-warm); border-radius:99px; height:6px; overflow:hidden;"><div style="width:58%; height:100%; background:#7C3AED; border-radius:99px;"></div></div>
+            <span style="min-width:140px;">Land freelance clients</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENVIRONMENT -->
+    <div class="card-section-label" style="padding-top:24px;">
+      <div class="section-title">User Environment</div>
+    </div>
+    <div class="persona-env">
+      <div class="env-card">
+        <div class="ec-label">Primary Device</div>
+        <div class="ec-val">Custom-built desktop PC at home. Uses a secondary laptop for writing while travelling.</div>
+      </div>
+      <div class="env-card">
+        <div class="ec-label">How He Uses HN</div>
+        <div class="ec-val">Both reader and active poster. Submits his own articles via "Submit" + monitors comments obsessively after posting.</div>
+      </div>
+      <div class="env-card">
+        <div class="ec-label">Social Context</div>
+        <div class="ec-val">Part of a small indie-hackers Discord. Cross-posts HN threads to his newsletter audience.</div>
+      </div>
+    </div>
+
+    <!-- GOALS & PAIN POINTS -->
+    <div class="card-section-label">
+      <div class="section-title">End Goals on Hacker News</div>
+    </div>
+    <div class="persona-goals">
+      <div>
+        <div class="bullet-list">
+          <div class="bullet-item"><div class="bullet-dot" style="background:#7C3AED;"></div>Submit original articles and projects to reach a technical audience</div>
+          <div class="bullet-item"><div class="bullet-dot" style="background:#7C3AED;"></div>Get high-quality upvotes and comments to validate content quality</div>
+          <div class="bullet-item"><div class="bullet-dot" style="background:#7C3AED;"></div>Drive meaningful traffic spikes to his personal blog</div>
+          <div class="bullet-item"><div class="bullet-dot" style="background:#7C3AED;"></div>Build credibility and a recognisable name in the dev community</div>
+          <div class="bullet-item"><div class="bullet-dot" style="background:#7C3AED;"></div>Attract freelance and consulting opportunities through visibility</div>
+        </div>
+      </div>
+      <div>
+        <div style="font-family:'Syne',sans-serif; font-size:11px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:12px;">Pain Points</div>
+        <div class="bullet-list">
+          <div class="bullet-item"><div class="bullet-dot dot-red"></div>Submissions get zero traction — no way to understand why</div>
+          <div class="bullet-item"><div class="bullet-dot dot-red"></div>No analytics — can't see who viewed or engaged with his post</div>
+          <div class="bullet-item"><div class="bullet-dot dot-red"></div>Timing a post correctly is pure guesswork with no guidance</div>
+          <div class="bullet-item"><div class="bullet-dot dot-red"></div>Duplicate submissions of similar articles drown out his content</div>
+          <div class="bullet-item"><div class="bullet-dot dot-red"></div>No way to notify past commenters when he publishes a follow-up</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SCENARIO -->
+    <div class="persona-scenario">
+      <div class="section-title">Day-in-the-Life Scenario</div>
+      <div class="scenario-box" style="background:var(--surface-warm);">
+        <div style="position:absolute; top:-8px; left:16px; font-family:'Syne',sans-serif; font-size:64px; color:#DDD6FE; line-height:1;">"</div>
+        <div class="scenario-text">
+          Abhay spends his evenings writing — every 2 weeks he completes a deep-dive article on a topic like "Why my Rust rewrite was slower than Node" or "I built a mini-browser in 500 lines". When he's ready to publish, he submits it to HN at 8am on a weekday, convinced that's the optimal time. He then refreshes the HN page obsessively for the next 3 hours watching the upvote count. If a post catches fire, his blog traffic jumps 10x for the day and his newsletter gains 200 new subscribers by evening. If it doesn't, he spends the next few days wondering whether the title was wrong, the timing was off, or HN's algorithm shadowbanned him.
+        </div>
+      </div>
+    </div>
+  </article>
+
+</main>
+
+<footer class="page-footer">
+  <strong>Hacker News · User Persona Document</strong> &nbsp;·&nbsp; UX Research 2024 &nbsp;·&nbsp; Based on qualitative &amp; quantitative research &nbsp;·&nbsp; For internal design use only
+</footer>
+
+</body>
+</html>
